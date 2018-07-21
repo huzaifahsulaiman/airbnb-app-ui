@@ -11,14 +11,14 @@ import colors from '../../styles/colors';
 export default class NextArrowButton extends Component {
   render() {
   	const { disabled, handleNextButton } = this.props;
-  	// const opacityStyle = disabled ? 0.2 : 0.6;
+  	const opacityStyle = disabled ? 0.2 : 0.6;
     return (
       <View style={styles.buttonWrapper}>
         <TouchableHighlight
-        //   style={[{opacity: opacityStyle}, styles.button]}
-          style={styles.button}
+          style={[{opacity: opacityStyle}, styles.button]}
+          // style={styles.button}
           onPress={handleNextButton}
-        //   disabled={disabled}
+          disabled={disabled}
         >
           <Icon
             name="angle-right"
@@ -33,7 +33,7 @@ export default class NextArrowButton extends Component {
 }
 
 NextArrowButton.propTypes = {
-//   disabled: PropTypes.bool,
+  disabled: PropTypes.bool,
   handleNextButton: PropTypes.func,
 };
 

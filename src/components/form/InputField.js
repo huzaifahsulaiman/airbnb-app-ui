@@ -13,14 +13,15 @@ import {
 } from 'react-native';
 
 export default class InputField extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       secureInput: props.inputType === 'text' || props.inputType === 'email' ? false : true,
-//       scaleCheckmarkValue: new Animated.Value(0),
-//     };
-//     this.toggleShowPassword = this.toggleShowPassword.bind(this);
-//   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      secureInput: props.inputType === 'text' || props.inputType === 'email' ? false : true,
+      //scaleCheckmarkValue: new Animated.Value(0),
+    };
+    //changing the current value of this. if function doesnt require to access the state of component, no need to bind
+    this.toggleShowPassword = this.toggleShowPassword.bind(this); 
+  }
 
 //   scaleCheckmark(value) {
 //     Animated.timing(
@@ -33,9 +34,10 @@ export default class InputField extends Component {
 //     ).start();
 //   }
 
-//   toggleShowPassword() {
-//     this.setState({ secureInput: !this.state.secureInput });
-//   }
+  //make secure input can be seen
+  toggleShowPassword() {
+    this.setState({ secureInput: !this.state.secureInput });
+  }
 
   render() {
   	const {
@@ -51,7 +53,7 @@ export default class InputField extends Component {
     //   autoFocus,
     //   autoCapitalize,
     } = this.props;
-  	// const { secureInput, scaleCheckmarkValue } = this.state;
+  	const { secureInput, scaleCheckmarkValue } = this.state;
   	const fontSize = labelTextSize || 14;
   	const color = labelColor || colors.white;
   	const inputColor = textColor || colors.white;
@@ -69,7 +71,8 @@ export default class InputField extends Component {
     return (
       <View style={[customStyle, styles.wrapper]}>
         <Text style={[{color, fontSize}, styles.label]}>{labelText}</Text>
-        {/* {inputType === 'password' ?
+        {/*make show button for password*/}
+        {inputType === 'password' ?
           <TouchableOpacity
             style={styles.showButton}
             onPress={this.toggleShowPassword}
@@ -77,7 +80,7 @@ export default class InputField extends Component {
             <Text style={styles.showButtonText}>{secureInput ? 'Show' : 'Hide'}</Text>
           </TouchableOpacity>
         : null }
-        <Animated.View style={[{transform: [{scale: iconScale}]}, styles.checkmarkWrapper]}>
+        {/* <Animated.View style={[{transform: [{scale: iconScale}]}, styles.checkmarkWrapper]}>
           <Icon
             name="check"
             color={colors.white}
@@ -86,8 +89,8 @@ export default class InputField extends Component {
         </Animated.View>*/}
         <TextInput
           style={[{color: inputColor, borderBottomColor: borderBottom}, styles.inputField]}
-          // secureTextEntry={secureInput}
-          secureTextEntry={inputType === 'password'}
+          secureTextEntry={secureInput}
+          // secureTextEntry={inputType === 'password'}
           // onChangeText={onChangeText}
           // keyboardType={keyboardType}
           // autoFocus={autoFocus}

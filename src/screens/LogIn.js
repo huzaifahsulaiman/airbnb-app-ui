@@ -88,13 +88,13 @@ class LogIn extends Component {
 //     }
 //   }
 
-//   toggleNextButtonState() {
-//     const { validEmail, validPassword } = this.state;
-//     if (validEmail && validPassword) {
-//       return false;
-//     }
-//     return true;
-//   }
+  toggleNextButtonState() {
+    // const { validEmail, validPassword } = this.state;
+    // if (validEmail && validPassword) {
+      // return false;
+    // }
+    return true;
+  }
 
   render() {
   	// const { formValid, loadingVisible, validEmail, validPassword } = this.state;
@@ -105,7 +105,7 @@ class LogIn extends Component {
       <KeyboardAvoidingView
         // style={[{backgroundColor: background}, styles.wrapper]}
         style={styles.wrapper}
-        behavior="padding"
+        behavior="padding" //making button not hidden under keyboard
        >
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
@@ -136,7 +136,7 @@ class LogIn extends Component {
           </ScrollView>
           <NextArrowButton
             handleNextButton={this.handleNextButton}
-            // disabled={this.toggleNextButtonState()}
+            disabled={this.toggleNextButtonState()}
           />
           {/* <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
             <Notification
