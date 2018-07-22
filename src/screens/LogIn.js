@@ -15,7 +15,7 @@ import colors from '../styles/colors';
 // import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
-// import Notification from '../components/Notification';
+import Notification from '../components/Notification';
 // import Loader from '../components/Loader';
 
 class LogIn extends Component {
@@ -25,22 +25,22 @@ class LogIn extends Component {
 //     headerTintColor: colors.white,
 //   });
 
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       formValid: true,
-//       validEmail: false,
-//       emailAddress: '',
-//       password: '',
-//       validPassword: false,
-//       loadingVisible: false,
-//     }
-//     this.handleCloseNotification = this.handleCloseNotification.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      formValid: false,
+      // validEmail: false,
+      // emailAddress: '',
+      // password: '',
+      // validPassword: false,
+      // loadingVisible: false,
+    }
+    this.handleCloseNotification = this.handleCloseNotification.bind(this);
 //     this.handleEmailChange = this.handleEmailChange.bind(this);
 //     this.handleNextButton = this.handleNextButton.bind(this);
 //     this.handlePasswordChange = this.handlePasswordChange.bind(this);
 //     this.toggleNextButtonState = this.toggleNextButtonState.bind(this);
-//   }
+  }
 
   handleNextButton() {
   	// this.setState({ loadingVisible: true });
@@ -56,9 +56,10 @@ class LogIn extends Component {
     alert('Next button pressed');
   }
 
-//   handleCloseNotification() {
-//     this.setState({ formValid: true });
-//   }
+  handleCloseNotification() {
+    this.setState({ formValid: true });
+    // alert('Close button pressed')
+  }
 
 //   handleEmailChange(email) {
 //     const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -97,14 +98,15 @@ class LogIn extends Component {
   }
 
   render() {
-  	// const { formValid, loadingVisible, validEmail, validPassword } = this.state;
-  	// const showNotification = formValid ? false : true;
-  	// const background = formValid ? colors.green01 : colors.darkOrange;
+    // const { formValid, loadingVisible, validEmail, validPassword } = this.state;
+    const { formValid } = this.state;
+  	const showNotification = formValid ? false : true;
+  	const background = formValid ? colors.green01 : colors.darkOrange;
   	// const notificationMarginTop = showNotification ? 10 : 0;
     return (
       <KeyboardAvoidingView
-        // style={[{backgroundColor: background}, styles.wrapper]}
-        style={styles.wrapper}
+        style={[{backgroundColor: background}, styles.wrapper]}
+        // style={styles.wrapper}
         behavior="padding" //making button not hidden under keyboard
        >
         <View style={styles.scrollViewWrapper}>
@@ -138,7 +140,8 @@ class LogIn extends Component {
             handleNextButton={this.handleNextButton}
             disabled={this.toggleNextButtonState()}
           />
-          {/* <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
+          {/* <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}> */}
+          <View style={styles.notificationWrapper}>
             <Notification
               showNotification={showNotification}
               handleCloseNotification={this.handleCloseNotification}
@@ -146,7 +149,7 @@ class LogIn extends Component {
               firstLine="Those credentials don't look right."
               secondLine="Please try again."
             />
-          </View> */}
+          </View>
         </View>
         {/* <Loader
           modalVisible={loadingVisible}
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
     flex: 1,
-    backgroundColor: colors.green01
+    // backgroundColor: colors.green01
   },
   scrollViewWrapper: {
     marginTop: 70,
