@@ -16,7 +16,7 @@ import colors from '../styles/colors';
 import InputField from '../components/form/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
-// import Loader from '../components/Loader';
+import Loader from '../components/Loader';
 
 class LogIn extends Component {
 
@@ -33,7 +33,7 @@ class LogIn extends Component {
       emailAddress: '',
       password: '',
       validPassword: false,
-      // loadingVisible: false,
+      loadingVisible: false,
     }
     this.handleCloseNotification = this.handleCloseNotification.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -43,22 +43,22 @@ class LogIn extends Component {
   }
 
   handleNextButton() {
-  	// this.setState({ loadingVisible: true });
+  	this.setState({ loadingVisible: true });
 
-  	//setTimeout(() => {
+  	setTimeout(() => {
       // const { emailAddress, password } = this.state;
       // if (this.props.logIn(emailAddress, password)) {
       if (this.state.emailAddress === 'abc123@abc.abc' && this.state.password === 'abc123'){
         // alert(this.state.emailAddress + " " + this.state.password);
-        // this.setState({ formValid: true, loadingVisible: false });
-        this.setState({ formValid: true });
+        this.setState({ formValid: true, loadingVisible: false });
+        // this.setState({ formValid: true });
         // alert(this.state.emailAddress);
       } else {
         // alert(this.state.emailAddress + " " + this.state.password);
-        this.setState({ formValid: false });
+        this.setState({ formValid: false, loadingVisible: false });
         // alert(this.state.emailAddress);
       }
-    //}, 2000);
+    }, 2000);
     //alert('Next button pressed');
   }
 
@@ -105,8 +105,7 @@ class LogIn extends Component {
   }
 
   render() {
-    // const { formValid, loadingVisible, validEmail, validPassword } = this.state;
-    const { formValid } = this.state;
+    const { formValid, loadingVisible, validEmail, validPassword } = this.state;
   	const showNotification = formValid ? false : true;
   	const background = formValid ? colors.green01 : colors.darkOrange;
   	const notificationMarginTop = showNotification ? 10 : 0;
@@ -157,10 +156,10 @@ class LogIn extends Component {
             />
           </View>
         </View>
-        {/* <Loader
+        <Loader
           modalVisible={loadingVisible}
           animationType="fade"
-        /> */}
+        />
       </KeyboardAvoidingView>
     );
   }
