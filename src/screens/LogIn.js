@@ -127,7 +127,7 @@ class LogIn extends Component {
               inputType="email"
               customStyle={{marginBottom: 30}}
               onChangeText={this.handleEmailChange}
-            //   showCheckmark={validEmail}
+              showCheckmark={validEmail}
               autoFocus={true}
             />
             <InputField
@@ -139,7 +139,7 @@ class LogIn extends Component {
               inputType="password"
               customStyle={{marginBottom: 30}}
               onChangeText={this.handlePasswordChange}
-              // showCheckmark={validPassword}
+              showCheckmark={validPassword}
             />
           </ScrollView>
           <NextArrowButton

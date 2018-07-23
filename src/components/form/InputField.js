@@ -17,22 +17,22 @@ export default class InputField extends Component {
     super(props);
     this.state = {
       secureInput: props.inputType === 'text' || props.inputType === 'email' ? false : true,
-      //scaleCheckmarkValue: new Animated.Value(0),
+      scaleCheckmarkValue: new Animated.Value(0),
     };
     //changing the current value of this. if function doesnt require to access the state of component, no need to bind
     this.toggleShowPassword = this.toggleShowPassword.bind(this); 
   }
 
-//   scaleCheckmark(value) {
-//     Animated.timing(
-//       this.state.scaleCheckmarkValue,
-//       {
-//         toValue: value,
-//         duration: 400,
-//         easing: Easing.easeOutBack,
-//       }
-//     ).start();
-//   }
+  scaleCheckmark(value) {
+    Animated.timing(
+      this.state.scaleCheckmarkValue,
+      {
+        toValue: value,
+        duration: 400,
+        easing: Easing.easeOutBack,
+      }
+    ).start();
+  }
 
   //make secure input can be seen
   toggleShowPassword() {
@@ -49,24 +49,25 @@ export default class InputField extends Component {
       inputType,
       customStyle,
       onChangeText,
-    //   showCheckmark,
-    //   autoFocus,
-    //   autoCapitalize,
+      showCheckmark,
+      autoFocus,
+      autoCapitalize,
     } = this.props;
   	const { secureInput, scaleCheckmarkValue } = this.state;
   	const fontSize = labelTextSize || 14;
   	const color = labelColor || colors.white;
   	const inputColor = textColor || colors.white;
   	const borderBottom = borderBottomColor || 'transparent';
-    // const keyboardType = inputType === 'email' ? 'email-address' : 'default';
+    const keyboardType = inputType === 'email' ? 'email-address' : 'default';
 
-    // const iconScale = scaleCheckmarkValue.interpolate({
-    //   inputRange: [0, 0.5, 1],
-    //   outputRange: [0, 1.6, 1]
-    // });
+    //checkmark animation
+    const iconScale = scaleCheckmarkValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, 1.6, 1]
+    });
 
-    // const scaleValue = showCheckmark ? 1 : 0;
-    // this.scaleCheckmark(scaleValue);
+    const scaleValue = showCheckmark ? 1 : 0;
+    this.scaleCheckmark(scaleValue);
 
     return (
       <View style={[customStyle, styles.wrapper]}>
@@ -80,22 +81,23 @@ export default class InputField extends Component {
             <Text style={styles.showButtonText}>{secureInput ? 'Show' : 'Hide'}</Text>
           </TouchableOpacity>
         : null }
-        {/* <Animated.View style={[{transform: [{scale: iconScale}]}, styles.checkmarkWrapper]}>
+        <Animated.View style={[{transform: [{scale: iconScale}]}, styles.checkmarkWrapper]}>
           <Icon
             name="check"
             color={colors.white}
             size={20}
           />
-        </Animated.View>*/}
+        </Animated.View>
         <TextInput
           style={[{color: inputColor, borderBottomColor: borderBottom}, styles.inputField]}
           secureTextEntry={secureInput}
           // secureTextEntry={inputType === 'password'}
           onChangeText={onChangeText}
-          // keyboardType={keyboardType}
-          // autoFocus={autoFocus}
-          // autoCapitalize={autoCapitalize}
+          keyboardType={keyboardType}
+          autoFocus={autoFocus}
+          autoCapitalize={autoCapitalize}
           autoCorrect={false}
+          underlineColorAndroid='transparent'
         /> 
       </View>
     );
@@ -111,9 +113,9 @@ InputField.propTypes = {
   inputType: PropTypes.string.isRequired,
   customStyle: PropTypes.object,
   onChangeText: PropTypes.func,
-//   showCheckmark: PropTypes.bool.isRequired,
-//   autoFocus: PropTypes.bool,
-//   autoCapitalize: PropTypes.bool,
+  showCheckmark: PropTypes.bool.isRequired,
+  autoFocus: PropTypes.bool,
+  autoCapitalize: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
