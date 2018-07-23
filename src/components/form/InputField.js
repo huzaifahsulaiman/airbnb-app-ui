@@ -48,7 +48,7 @@ export default class InputField extends Component {
       borderBottomColor,
       inputType,
       customStyle,
-    //   onChangeText,
+      onChangeText,
     //   showCheckmark,
     //   autoFocus,
     //   autoCapitalize,
@@ -91,7 +91,7 @@ export default class InputField extends Component {
           style={[{color: inputColor, borderBottomColor: borderBottom}, styles.inputField]}
           secureTextEntry={secureInput}
           // secureTextEntry={inputType === 'password'}
-          // onChangeText={onChangeText}
+          onChangeText={onChangeText}
           // keyboardType={keyboardType}
           // autoFocus={autoFocus}
           // autoCapitalize={autoCapitalize}
@@ -110,7 +110,7 @@ InputField.propTypes = {
   borderBottomColor: PropTypes.string,
   inputType: PropTypes.string.isRequired,
   customStyle: PropTypes.object,
-//   onChangeText: PropTypes.func,
+  onChangeText: PropTypes.func,
 //   showCheckmark: PropTypes.bool.isRequired,
 //   autoFocus: PropTypes.bool,
 //   autoCapitalize: PropTypes.bool,

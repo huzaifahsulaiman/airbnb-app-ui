@@ -28,32 +28,38 @@ class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formValid: false,
-      // validEmail: false,
-      // emailAddress: '',
-      // password: '',
-      // validPassword: false,
+      formValid: true,
+      validEmail: false,
+      emailAddress: '',
+      password: '',
+      validPassword: false,
       // loadingVisible: false,
     }
     this.handleCloseNotification = this.handleCloseNotification.bind(this);
-//     this.handleEmailChange = this.handleEmailChange.bind(this);
-//     this.handleNextButton = this.handleNextButton.bind(this);
-//     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-//     this.toggleNextButtonState = this.toggleNextButtonState.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleNextButton = this.handleNextButton.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.toggleNextButtonState = this.toggleNextButtonState.bind(this);
   }
 
   handleNextButton() {
   	// this.setState({ loadingVisible: true });
 
-  	// setTimeout(() => {
-    //   const { emailAddress, password } = this.state;
-    //   if (this.props.logIn(emailAddress, password)) {
-    //     this.setState({ formValid: true, loadingVisible: false });
-    //   } else {
-    //     this.setState({ formValid: false, loadingVisible: false });
-    //   }
-    // }, 2000);
-    alert('Next button pressed');
+  	//setTimeout(() => {
+      // const { emailAddress, password } = this.state;
+      // if (this.props.logIn(emailAddress, password)) {
+      if (this.state.emailAddress === 'abc123@abc.abc' && this.state.password === 'abc123'){
+        // alert(this.state.emailAddress + " " + this.state.password);
+        // this.setState({ formValid: true, loadingVisible: false });
+        this.setState({ formValid: true });
+        // alert(this.state.emailAddress);
+      } else {
+        // alert(this.state.emailAddress + " " + this.state.password);
+        this.setState({ formValid: false });
+        // alert(this.state.emailAddress);
+      }
+    //}, 2000);
+    //alert('Next button pressed');
   }
 
   handleCloseNotification() {
@@ -61,39 +67,40 @@ class LogIn extends Component {
     // alert('Close button pressed')
   }
 
-//   handleEmailChange(email) {
-//     const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     this.setState({ emailAddress: email });
+  handleEmailChange(email) {
+    const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    this.setState({ emailAddress: email });
 
-//     if (!this.state.validEmail) {
-//       if (emailCheckRegex.test(email)) {
-//       	this.setState({ validEmail: true });
-//       }
-//     } else {
-//       if (!emailCheckRegex.test(email)) {
-//       	this.setState({ validEmail: false });
-//       }
-//     }
-//   }
+    if (!this.state.validEmail) {
+      if (emailCheckRegex.test(email)) {
+        this.setState({ validEmail: true });
+        // alert("email valid")
+      }
+    } else {
+      if (!emailCheckRegex.test(email)) {
+        this.setState({ validEmail: false });
+        // alert("email not valid")
+      }
+    }
+  }
 
-//   handlePasswordChange(password) {
-//     this.setState({ password });
-
-//     if (!this.state.validPassword) {
-//       if (password.length > 4) {
-//       	//Password has to be at least 4 characters long
-//       	this.setState({ validPassword: true });
-//       }
-//     } else if (password <= 4) {
-//       this.setState({ validPassword: false });
-//     }
-//   }
+  handlePasswordChange(password) {
+    this.setState({ password: password });
+    if (!this.state.validPassword) {
+      if (password.length > 4) {
+      	//Password has to be at least 4 characters long
+      	this.setState({ validPassword: true });
+      }
+    } else if (password <= 4) {
+      this.setState({ validPassword: false });
+    }
+  }
 
   toggleNextButtonState() {
-    // const { validEmail, validPassword } = this.state;
-    // if (validEmail && validPassword) {
-      // return false;
-    // }
+    const { validEmail, validPassword } = this.state;
+    if (validEmail && validPassword) {
+      return false;
+    }
     return true;
   }
 
@@ -102,7 +109,7 @@ class LogIn extends Component {
     const { formValid } = this.state;
   	const showNotification = formValid ? false : true;
   	const background = formValid ? colors.green01 : colors.darkOrange;
-  	// const notificationMarginTop = showNotification ? 10 : 0;
+  	const notificationMarginTop = showNotification ? 10 : 0;
     return (
       <KeyboardAvoidingView
         style={[{backgroundColor: background}, styles.wrapper]}
@@ -120,7 +127,7 @@ class LogIn extends Component {
               borderBottomColor={colors.white}
               inputType="email"
               customStyle={{marginBottom: 30}}
-            //   onChangeText={this.handleEmailChange}
+              onChangeText={this.handleEmailChange}
             //   showCheckmark={validEmail}
               autoFocus={true}
             />
@@ -132,7 +139,7 @@ class LogIn extends Component {
               borderBottomColor={colors.white}
               inputType="password"
               customStyle={{marginBottom: 30}}
-              // onChangeText={this.handlePasswordChange}
+              onChangeText={this.handlePasswordChange}
               // showCheckmark={validPassword}
             />
           </ScrollView>
@@ -140,8 +147,7 @@ class LogIn extends Component {
             handleNextButton={this.handleNextButton}
             disabled={this.toggleNextButtonState()}
           />
-          {/* <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}> */}
-          <View style={styles.notificationWrapper}>
+          <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
             <Notification
               showNotification={showNotification}
               handleCloseNotification={this.handleCloseNotification}

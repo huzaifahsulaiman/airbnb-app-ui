@@ -16,7 +16,6 @@ export default class NextArrowButton extends Component {
       <View style={styles.buttonWrapper}>
         <TouchableHighlight
           style={[{opacity: opacityStyle}, styles.button]}
-          // style={styles.button}
           onPress={handleNextButton}
           disabled={disabled}
         >
