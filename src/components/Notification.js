@@ -87,20 +87,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
+    marginTop: 5
   },
   errorText: {
     color: colors.darkOrange,
     marginRight: 5,
-    fontSize: 14,
+    fontSize: 15,
     marginBottom: 2,
   },
   errorMessage: {
     marginBottom: 2,
-    fontSize: 14,
+    fontSize: 15,
   },
   closeButton: {
     position: 'absolute',
-    right: 10,
-    top: 10,
+    right: 2,
+    top: 2,
   },
 });

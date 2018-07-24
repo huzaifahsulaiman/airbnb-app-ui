@@ -59,7 +59,9 @@ export default class ForgotPassword extends Component {
   }
 
   handleCloseNotification() {
-    this.setState({ formValid: true });
+    this.setState({ 
+      formValid: true 
+    });
   }
 
   render() {

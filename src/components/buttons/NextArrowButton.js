@@ -39,8 +39,8 @@ NextArrowButton.propTypes = {
 const styles = StyleSheet.create({
   buttonWrapper: {
     alignItems: 'flex-end',
-    right: 20,
-    bottom: 20,
+    right: 10,
+    bottom: 10,
   },
   button: {
     alignItems: 'center',

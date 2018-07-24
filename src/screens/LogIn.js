@@ -8,9 +8,9 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { ActionCreators } from '../redux/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../redux/actions';
 import colors from '../styles/colors'; 
 // import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
@@ -46,9 +46,9 @@ class LogIn extends Component {
   	this.setState({ loadingVisible: true });
 
   	setTimeout(() => {
-      // const { emailAddress, password } = this.state;
-      // if (this.props.logIn(emailAddress, password)) {
-      if (this.state.emailAddress === 'abc123@abc.abc' && this.state.password === 'abc123'){
+      const { emailAddress, password } = this.state;
+      if (this.props.logIn(emailAddress, password)) {
+      // if (this.state.emailAddress === 'abc123@abc.abc' && this.state.password === 'abc123'){
         // alert(this.state.emailAddress + " " + this.state.password);
         this.setState({ formValid: true, loadingVisible: false });
         // this.setState({ formValid: true });
@@ -108,7 +108,8 @@ class LogIn extends Component {
     const { formValid, loadingVisible, validEmail, validPassword } = this.state;
   	const showNotification = formValid ? false : true;
   	const background = formValid ? colors.green01 : colors.darkOrange;
-  	const notificationMarginTop = showNotification ? 10 : 0;
+    const notificationMarginTop = showNotification ? 10 : 0;
+    console.log(this.props.loggedInStatus);
     return (
       <KeyboardAvoidingView
         style={[{backgroundColor: background}, styles.wrapper]}
@@ -193,15 +194,15 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     loggedInStatus: state.loggedInStatus,
-//   }
-// };
+const mapStateToProps = (state) => {
+  return {
+    loggedInStatus: state.loggedInStatus,
+  }
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators(ActionCreators, dispatch);
-// };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(ActionCreators, dispatch);
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
-export default (LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+// export default (LogIn);
